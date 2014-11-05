@@ -1,0 +1,87 @@
+\documentclass{beamer}
+\usepackage{beamerthemesplit}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{transparent}
+\usepackage{bbold}
+\usepackage[italian]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{pgfplots}
+\usepackage{scalefnt}
+\usepackage{color}
+\usepackage{xcolor}
+\title[mRMR]{mRMR - features selection method}
+\institute{
+\begin{small}
+Corso di Laurea in Informatica Magistrale
+\end{small}}
+\author{\textbf{Simone Rutigliano}}
+\date{\tiny{\today}}
+
+\usebackgroundtemplate{
+%    \transparent{0.12}{
+     \includegraphics[width=\paperwidth, height=\paperheight]{./figure/theme/escher_hands_tr.png}
+%    }
+}
+
+%\usetheme{Hannover}
+\usetheme{Copenhagen}
+\usecolortheme{seahorse}
+\usecolortheme{rose}
+%\usetheme{Frankfurt}
+%\usecolortheme{beetle}
+
+%\useoutertheme[subsection=false]{smoothbars}
+%\useoutertheme[subsection=false]{smoothtree}
+\useoutertheme{shadow}
+\setbeamercovered{dynamic}
+
+\pgfdeclareimage[height=1cm]{logo}{figure/theme/logo}
+\logo{\pgfuseimage{logo}}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\maketitle
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{Outline}
+	\tableofcontents
+\end{frame}
+
+\begin{frame}
+	\frametitle{Max Dependency}
+	\nocite{Ding:2003:MRF:937976.938050}
+	\nocite{Peng05featureselection}
+
+	$$ I (x;y) = \int \int p(x,y)\log \frac{p(x,y)}{p(x)p(Y)} \mathrm{d}x \mathrm{d}y$$
+
+$$ \max D(S,c), D = I(\{x_i,i=1,\dots,m \};c )$$
+\end{frame}
+\begin{frame}
+	\frametitle{Max Relevance}
+	$$\max D(S,c), D= \frac{1}{|S|} \sum_{x_i \in S} I (x_i;c)$$
+\end{frame}
+\begin{frame}
+	\frametitle{Min Redundancy}
+	$$\min R(S), D= \frac{1}{|S|^2} \sum_{x_i,x_j \in S} I (x_i;x_j)$$
+\end{frame}
+\begin{frame}
+	\frametitle{mRMR}
+	$$\max \Phi(D,R), \Phi = D - R$$
+\end{frame}
+\begin{frame}{Bibliography}
+	\frametitle{References}
+	\bibliographystyle{alpha}
+	\bibliography{mybib}
+\end{frame}
+\end{document}
