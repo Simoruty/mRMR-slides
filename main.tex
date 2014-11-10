@@ -97,12 +97,12 @@ La mutua informazione rappresenta i bit di informazione che una delle variabili 
 		\begin{column}{0.5\textwidth}
 			\begin{itemize}
 				\item $H(X) = 7$
-				\item $H(Y ) = 5$\newline
+				\item $H(Y) = 5$\newline
 			\end{itemize}
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\begin{itemize}
-				\item $H(X|Y ) = 5$
+				\item $H(X|Y) = 5$
 				\item $H(Y|X) = 3$\newline
 			\end{itemize}
 		\end{column}
@@ -133,9 +133,13 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 \subsection{Problematiche}
 \begin{frame}
 	\frametitle{Problematiche}
-	In caso di variabili continue, difficoltà nella computazione degli integrali nello spazio continuo su un numero limitato di campioni\newline\newline
-	\textbf{Soluzione}\newline\newline
-	Incorporare la discretizzazione dei dati nella fase di preprocessing
+	\begin{itemize}
+		\item In caso di variabili continue, difficoltà nella computazione degli integrali nello spazio continuo su un numero limitato di campioni
+	\end{itemize}
+	\textbf{Soluzione}
+	\begin{itemize}
+		\item Incorporare la discretizzazione dei dati nella fase di preprocessing
+	\end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -143,35 +147,107 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 \section{Max Dependency}
 \subsection{Definizione}
 \begin{frame}
-	\frametitle{Max Dependency}
+	\frametitle{Max Dependency \dots}
 	In termini di mutua informazione, l'obiettivo è trovare il set di feature \emph{S} con \emph{m} features che hanno la più alta dipendenza con la classe target \emph{c}
-	$$ \max Dep(S,c), Dep = I(\{x_i,i=1,\dots,m \};c )$$
+	$$ \max Dep(S,c)~~~~~ Dep = I(\{x_1,\dots,x_m \};c )$$
+	Dove 
+	\begin{itemize}
+		\item $x_1,\dots,x_m$ sono le $m$ features selezionate
+		\item $I$ indica la mutua informazione tra le feature del set
+	\end{itemize}
 \end{frame}
 
 \subsection{Formula}
 \begin{frame}
-	\frametitle{Max Dependency}
-
-	
+	\frametitle{\dots Max Dependency}
+	\begin{itemize}
+		\item Dato un set contenente \emph{m-1} features( $S_{m-1}$) l'\emph{m-}sima feature consiste  nella feature che più riesce ad incrementare la mutua informazione $I(S,c)$
+	\end{itemize}
+	\begin{align*}
+	I (S_m;c) &= \int\int p(S_m,c)\log \frac{p(S_m,c)}{p(S_m)p(c)} \mathrm{d}S_m \mathrm{d}c \\
+	&= \int\int p(S_{m-1},x_m,c)\log \frac{p(S_{m-1},x_m,c)}{p(S{m-1},x_m)p(c)} \mathrm{d}S_{m-1}\mathrm{d}S_m\mathrm{d}c \\
+	&=\int\dots\int p(x_1,\dots,x_m,c)\log \frac{p(x_1,\dots,x_m,c)}{p(x_1,\dots,x_m)p(c)} \mathrm{d}x_1,\dots,\mathrm{d}x_m \mathrm{d}c \\\\
+	\end{align*}
 
 \end{frame}
+
 \subsection{Problemi}
 \begin{frame}
-	
+	\frametitle{Problemi nel continuo}
+	Difficoltà nella stima accurata delle funzioni di densità multivariate $p(x_1,\dots,x_m)$ e $p(x_1,\dots,x_m,c)$
+	\begin{itemize}
+		\item Numero di campioni insufficienti
+		\item Comporta il calcolo delle inverse delle matrice di covarianza multidimensionali
+		\item Computazione molto lenta
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Problemi nel discreto}
+	Difficoltà nel calcolo delle funzioni di distribuzione di probabilità congiunta $p(x_1,\dots,x_m)$ e $p(x_1,\dots,x_m,c)$
+	\begin{itemize}
+		\item Numero di campioni insufficienti
+		\item Computazione molto lenta in caso di un valore \emph{m} molto alto
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Soluzione}
+	\begin{itemize}
+		\item Approssimare la funzione di dipendenza ad una funzione computazionalmente meno onerosa
+	\end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Max Relevance}
 \subsection{Definizione}
+\begin{frame}
+	\frametitle{Definizione}
+	\begin{itemize}
+		\item Ricercare le feature che riescano ad approssimare la funzione 	$$ \max Dep(S,c)~~~~~ Dep = I(\{x_1,\dots,x_m \};c )$$
+		con il valor medio di tutti i valori della mutua informazione tra le singole feature $x_i$ e la classe $c$
+	\end{itemize}
+\end{frame}
 \subsection{Formule}
 \begin{frame}
 	\frametitle{Per variabili discrete}
-	$$\max D(S,c), D= \frac{1}{|S|} \sum\limits_{x_i \in S} I (x_i;c)$$
+	In caso di variabili discrete l'obiettivo sarà massimizzare la funzione \emph{Dep} calcolata nel seguente modo
+	$$Dep= \frac{1}{|S|} \sum\limits_{x_i \in S} I (x_i;c)$$
+	dove 
+	\begin{itemize}
+		\item S indica il set contenente tutte le features
+		\item $x_i$ indica la \emph{i-}sima feature da considerare
+		\item $c$ indica la classe target
+	\end{itemize}
 \end{frame}
+
 \begin{frame}
-	\frametitle{Per variabili continue}
+	\frametitle{Per variabili continue\dots}
+	Per le variabili continue bisogna usare la \emph{F-}statistic come misura per calcolare la rilevanza tra le features $x_i$ e la classe target \emph{c}
+	$$ F(x_i,c) = \frac{\frac{\sum\limits_{K}{n_k(\bar{x_k}-\bar{x})}}{K-1}}{\sigma^2}$$
+	dove: $\sigma^2=\frac{ \sum\limits_{k}{(n_k-1)\sigma^2_k}}{n-K}$
+	
+	
+	
+	%TODO
+
+
 \end{frame}
+
+\begin{frame}
+	\frametitle{\dots per variabili continue}
+	In caso di variabili continue l'obiettivo sarà massimizzare la funzione \emph{Dep} calcolata nel seguente modo
+	$$Dep= \frac{1}{|S|} \sum\limits_{x_i \in S} F(x_i;c)$$
+	dove 
+	\begin{itemize}
+		\item $F$ indica la funzione $F-test$ calcolata sulle feature in relazione alla classe target
+		\item $S$ indica il set contenente tutte le features
+		\item $x_i$ indica la \emph{i-}sima feature da considerare
+		\item $c$ indica la classe target
+	\end{itemize}
+\end{frame}
+
 \subsection{Problematiche}
 \begin{frame}
 	\frametitle{ridondanza}
@@ -214,8 +290,6 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 \end{frame}
 \begin{frame}
 	\frametitle{Continuous}
-	$$ F(g_i,h) = \frac{\frac{\sum\limits_{K}{n_k(\bar{g_k}-\bar{g})}}{K-1}}{\sigma^2}$$
-	dove: $\sigma^2=\frac{ \sum\limits_{k}{(n_k-1)\sigma^2_k}}{n-K}$
 \end{frame}
 \begin{frame}
 	\frametitle{Continuous - FCD}
