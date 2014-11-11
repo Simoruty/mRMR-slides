@@ -203,7 +203,7 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 \section{Max Relevance}
 \subsection{Definizione}
 \begin{frame}
-	\frametitle{Definizione}
+	\frametitle{Max Relevance - Definizione}
 	\begin{itemize}
 		\item Ricercare le feature che riescano ad approssimare la funzione 	$$ \max Dep(S,c)~~~~~ Dep = I(\{x_1,\dots,x_m \};c )$$
 		con il valor medio di tutti i valori della mutua informazione tra le singole feature $x_i$ e la classe $c$
@@ -226,13 +226,14 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 	\frametitle{Per variabili continue\dots}
 	Per le variabili continue bisogna usare la \emph{F-}statistic come misura per calcolare la rilevanza tra le features $x_i$ e la classe target \emph{c}
 	$$ F(x_i,c) = \frac{\frac{\sum\limits_{K}{n_k(\bar{x_k}-\bar{x})}}{K-1}}{\sigma^2}$$
-	dove: $\sigma^2=\frac{ \sum\limits_{k}{(n_k-1)\sigma^2_k}}{n-K}$
-	
-	
-	
-	%TODO
-
-
+	dove: 
+	\begin{itemize}
+		\item $\sigma^2=\frac{ \sum\limits_{k}{(n_k-1)\sigma^2_k}}{n-K}$
+		\item $k$ indica le classi denotate da $c$
+		\item $\bar{x}$ è il valor medio di $x_i$ di tutti i campioni
+		\item $\bar{x_k}$ è il valor medio di $x_i$ di tutti i campioni di classe $k$
+		\item $n_k$ e $\sigma_k$ indicano dimensione e varianza della $k-$classe
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -250,23 +251,51 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 
 \subsection{Problematiche}
 \begin{frame}
-	\frametitle{ridondanza}
-	si incorre nel problema della ridondanza
+	\frametitle{Problematiche}
+	\begin{itemize}
+		\item Features selezionate in questo modo potrebbero essere ricche di \textbf{ridondanza}\newline
+		\item Se due features dipendono l'una dall'altra è probabile che eliminando una di esse il potere discriminante non sarà decrementato
+	\end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Min Redundancy}
 \subsection{Definizione}
 \begin{frame}
-	contenuto...
+	\frametitle{Min Redundancy - Definizione}
+	\begin{itemize}
+		\item Consiste nel selezionare le features in modo tale che siano tra loro più dissimilari possibili
+		\item Il subset che si otterrà sarà il più rappresentativo possibile dell'intero dataset
+	\end{itemize}
+	Formalmente consiste nel 
+	\begin{itemize}
+	\item Calcolare una funzione \textbf{Red} calcolata sul set di feature $S$
+	\item Trovare il subset che minimizza la funzione calcolata
+	\end{itemize}
+	$$\min Red(S)$$
 \end{frame}
+
 \subsection{Formule}
 \begin{frame}
 	\frametitle{Per variabili discrete}
-	$$\min R(S), D= \frac{1}{|S|^2} \sum\limits_{x_i,x_j \in S} I (x_i;x_j)$$
+	$$Red (S)= \frac{1}{|S|^2} \sum\limits_{x_i,x_j \in S} I (x_i;x_j)$$
+	dove 
+	\begin{itemize}
+		\item $|S|(= m)$ è il numero di features presenti nel subset $S$
+		\item $x_i$ e $x_j$ rappresentano rispettivamente la $i$-esima e $j$-esima feature del subset $S$
+		\item $I (x_i;x_j)$ rappresenta la mutua informazione tra le due feature
+	\end{itemize}
 \end{frame}
+
 \begin{frame}
 	\frametitle{Per variabili continue}
+	$$Red(S)= \frac{1}{|S|^2} \sum\limits_{x_i,x_j \in S} |c (x_i;x_j)|$$
+	dove 
+	\begin{itemize}
+		\item $|S|(= m)$ è il numero di features presenti nel subset $S$
+		\item $x_i$ e $x_j$ rappresentano rispettivamente la $i$-esima e $j$-esima feature del subset $S$
+		\item $|c (x_i;x_j)|$ indica il valore assoluto del coefficiente di correlazione di Pearson tra le feature $x_i$ e $x_j$
+	\end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -274,10 +303,32 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 \section{mRMR}
 \subsection{Definizione}
 \begin{frame}
-	\frametitle{Def}
+	\frametitle{mRMR - Definizione}
+	Based on these observations, we propose to expand the representative power of
+	the feature set by requiring that features are maximally dissimilar to each other,
+	for example, their mutual Euclidean distances are maximized, or their pair-wise
+	correlations are minimized. These minimum redundancy criteria are supplemented
+	by the usual maximum relevance criteria such as maximal mutual information with
+	the target phenotypes. We therefore call this approach the minimum redundancy —
+	maximum relevance (MRMR) approach.
 \end{frame}
 
 \subsection{Formule}
+\begin{frame}
+	\frametitle{Calcolo mRMR}
+	\begin{itemize}
+		\item Variabili discrete
+			\begin{itemize}
+				\item MID - Mutual information difference
+				\item MIQ - Mutual information quotient\newline
+			\end{itemize}
+		\item Variabili continue
+			\begin{itemize}
+				\item FCD - F-test correlation difference
+				\item FCQ - F-test correlation quotient
+			\end{itemize}
+	\end{itemize}
+\end{frame}
 \begin{frame}
 	\frametitle{Discrete - MID}
 	$$\max \Phi(D,R), \Phi = D - R$$
@@ -302,6 +353,11 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 \subsection{Benefici}
 \begin{frame}
 	\frametitle{Benefici}
+	The benefits of this approach can be real-
+	ized in two ways. (1) With the same number of features, we expect the MRMR
+	feature set to be more representative of the target phenotypes, therefore leading to
+	better generalization property. (2) Equivalently, we can use a smaller MRMR fea-
+	ture set to effectively cover the same space as a larger conventional feature set does.
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
