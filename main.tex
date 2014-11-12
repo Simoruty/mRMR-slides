@@ -112,7 +112,7 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 \end{frame}
 \subsection{Formule}
 \begin{frame}
-	\frametitle{Discrete}
+	\frametitle{In caso di varibili discrete\dots}
 	Definite due variabili casuali discrete \emph{X} e \emph{Y}
 	$$ I (x;y) = \sum\limits_{y \in Y} \sum\limits_{x \in X} p(x,y)\log \frac{p(x,y)}{p(x)p(y)}$$
 	dove
@@ -122,7 +122,7 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 	\end{itemize}
 \end{frame}
 \begin{frame}
-	\frametitle{Continuous}
+	\frametitle{\dots mentre nel caso di variabili continue}
 	$$ I (x;y) = \int_Y \int_X p(x,y)\log \frac{p(x,y)}{p(x)p(y)} \mathrm{d}x \mathrm{d}y$$
 	dove
 	\begin{itemize}
@@ -163,7 +163,9 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 	\begin{itemize}
 		\item Dato un set contenente \emph{m-1} features( $S_{m-1}$) l'\emph{m-}sima feature consiste  nella feature che più riesce ad incrementare la mutua informazione $I(S,c)$
 	\end{itemize}
+	
 	\begin{align*}
+	\hspace*{-0.6cm}
 	I (S_m;c) &= \int\int p(S_m,c)\log \frac{p(S_m,c)}{p(S_m)p(c)} \mathrm{d}S_m \mathrm{d}c \\
 	&= \int\int p(S_{m-1},x_m,c)\log \frac{p(S_{m-1},x_m,c)}{p(S{m-1},x_m)p(c)} \mathrm{d}S_{m-1}\mathrm{d}S_m\mathrm{d}c \\
 	&=\int\dots\int p(x_1,\dots,x_m,c)\log \frac{p(x_1,\dots,x_m,c)}{p(x_1,\dots,x_m)p(c)} \mathrm{d}x_1,\dots,\mathrm{d}x_m \mathrm{d}c \\\\
@@ -213,7 +215,7 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 \begin{frame}
 	\frametitle{Per variabili discrete}
 	In caso di variabili discrete l'obiettivo sarà massimizzare la funzione \emph{Dep} calcolata nel seguente modo
-	$$Dep= \frac{1}{|S|} \sum\limits_{x_i \in S} I (x_i;c)$$
+	$$Dep(S,c)= \frac{1}{|S|} \sum\limits_{x_i \in S} I (x_i;c)$$
 	dove 
 	\begin{itemize}
 		\item S indica il set contenente tutte le features
@@ -239,7 +241,7 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 \begin{frame}
 	\frametitle{\dots per variabili continue}
 	In caso di variabili continue l'obiettivo sarà massimizzare la funzione \emph{Dep} calcolata nel seguente modo
-	$$Dep= \frac{1}{|S|} \sum\limits_{x_i \in S} F(x_i;c)$$
+	$$Dep(S,c)= \frac{1}{|S|} \sum\limits_{x_i \in S} F(x_i;c)$$
 	dove 
 	\begin{itemize}
 		\item $F$ indica la funzione $F-test$ calcolata sulle feature in relazione alla classe target
@@ -329,23 +331,45 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 \end{frame}
 \begin{frame}
 	\frametitle{Discrete - MID}
-	$$\max \Phi(D,R), \Phi = D - R$$
-	dove $D=I(i,h)$ e $R=\frac{1}{|S|}\sum\limits_{j \in S}I(i,j)$
+	Consiste nel trovare le features che massimizzino la differenza tra dipendenze e ridondanze di queste features dalla classe target attraverso il calcolo della mutua informazione
+	$$\max(Dep(S,c) - Red(S)$$
+	dove ricordiamo che
+	\begin{itemize}
+		\item $Dep(S,c)= \frac{1}{|S|} \sum\limits_{x_i \in S} I (x_i;c)$
+		\item $Red (S)= \frac{1}{|S|^2} \sum\limits_{x_i,x_j \in S} I (x_i;x_j)$
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Discrete - MIQ}
-	$$\max \Phi(D,R), \Phi = \frac{D}{R}$$
-\end{frame}
-\begin{frame}
-	\frametitle{Continuous}
+	Consiste nel trovare le features che massimizzino il rapporto tra dipendenze e ridondanze di queste features dalla classe target attraverso il calcolo della mutua informazione
+	$$\max\frac{Dep(S,c)}{Red(S)}$$
+	dove ricordiamo che
+	\begin{itemize}
+		\item $Dep(S,c)= \frac{1}{|S|} \sum\limits_{x_i \in S} I (x_i;c)$
+		\item $Red (S)= \frac{1}{|S|^2} \sum\limits_{x_i,x_j \in S} I (x_i;x_j)$
+	\end{itemize}
 \end{frame}
 \begin{frame}
 	\frametitle{Continuous - FCD}
+	Consiste nel trovare le features che massimizzino la differenza tra dipendenze e ridondanze di queste features dalla classe target attraverso il calcolo del F-test
+	$$\max(Dep(S,c) - Red(S)$$
+	dove ricordiamo che
+	\begin{itemize}
+		\item $Dep(S,c)= \frac{1}{|S|} \sum\limits_{x_i \in S} F(x_i;c)$
+		\item $Red(S)= \frac{1}{|S|^2} \sum\limits_{x_i,x_j \in S} |c (x_i;x_j)|$
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Continuous - FCQ}
+	Consiste nel trovare le features che massimizzino il rapporto tra dipendenze e ridondanze di queste features dalla classe target attraverso il calcolo del F-test
+	$$\max\frac{Dep(S,c)}{Red(S)}$$
+	dove ricordiamo, in caso di variabili discrete
+	\begin{itemize}
+		\item $Dep(S,c)= \frac{1}{|S|} \sum\limits_{x_i \in S} F(x_i;c)$
+		\item $Red(S)= \frac{1}{|S|^2} \sum\limits_{x_i,x_j \in S} |c (x_i;x_j)|$
+	\end{itemize}
 \end{frame}
 
 \subsection{Benefici}
