@@ -332,7 +332,7 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 \begin{frame}
 	\frametitle{Discrete - MID}
 	Consiste nel trovare le features che massimizzino la differenza tra dipendenze e ridondanze di queste features dalla classe target attraverso il calcolo della mutua informazione
-	$$\max(Dep(S,c) - Red(S)$$
+	$$\max Dep(S,c) - Red(S)$$
 	dove ricordiamo che
 	\begin{itemize}
 		\item $Dep(S,c)= \frac{1}{|S|} \sum\limits_{x_i \in S} I (x_i;c)$
@@ -375,11 +375,11 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 \subsection{Benefici}
 \begin{frame}
 	\frametitle{Benefici}
-	The benefits of this approach can be real-
-	ized in two ways. (1) With the same number of features, we expect the MRMR
-	feature set to be more representative of the target phenotypes, therefore leading to
-	better generalization property. (2) Equivalently, we can use a smaller MRMR fea-
-	ture set to effectively cover the same space as a larger conventional feature set does.
+	\begin{itemize}
+		\item With the same number of features, we expect the MRMR
+		feature set to be more representative of the target phenotypes, therefore leading to better generalization property
+		\item Equivalently, we can use a smaller MRMR feature set to effectively cover the same space as a larger conventional feature set does
+	\end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
