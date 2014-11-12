@@ -332,7 +332,7 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 \begin{frame}
 	\frametitle{Discrete - MID}
 	Consiste nel trovare le features che massimizzino la differenza tra dipendenze e ridondanze di queste features dalla classe target attraverso il calcolo della mutua informazione
-	$$\max Dep(S,c) - Red(S)$$
+	$$\max (Dep(S,c) - Red(S))$$
 	dove ricordiamo che
 	\begin{itemize}
 		\item $Dep(S,c)= \frac{1}{|S|} \sum\limits_{x_i \in S} I (x_i;c)$
@@ -353,7 +353,7 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 \begin{frame}
 	\frametitle{Continuous - FCD}
 	Consiste nel trovare le features che massimizzino la differenza tra dipendenze e ridondanze di queste features dalla classe target attraverso il calcolo del F-test
-	$$\max(Dep(S,c) - Red(S)$$
+	$$\max((Dep(S,c) - Red(S))$$
 	dove ricordiamo che
 	\begin{itemize}
 		\item $Dep(S,c)= \frac{1}{|S|} \sum\limits_{x_i \in S} F(x_i;c)$
@@ -365,7 +365,7 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 	\frametitle{Continuous - FCQ}
 	Consiste nel trovare le features che massimizzino il rapporto tra dipendenze e ridondanze di queste features dalla classe target attraverso il calcolo del F-test
 	$$\max\frac{Dep(S,c)}{Red(S)}$$
-	dove ricordiamo, in caso di variabili discrete
+	dove ricordiamo che
 	\begin{itemize}
 		\item $Dep(S,c)= \frac{1}{|S|} \sum\limits_{x_i \in S} F(x_i;c)$
 		\item $Red(S)= \frac{1}{|S|^2} \sum\limits_{x_i,x_j \in S} |c (x_i;x_j)|$
@@ -376,9 +376,8 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 \begin{frame}
 	\frametitle{Benefici}
 	\begin{itemize}
-		\item With the same number of features, we expect the MRMR
-		feature set to be more representative of the target phenotypes, therefore leading to better generalization property
-		\item Equivalently, we can use a smaller MRMR feature set to effectively cover the same space as a larger conventional feature set does
+		\item Con lo stesso numero di features, mRMR garantisce maggiore rappresentatività al dataset offrendo una migliore proprietà di generalizzazione
+		\item Allo stesso modo, possiamo usare un set di feature mRMR più piccolo per ricoprire in maniera più efficace lo stesso spazio ricoperto da feature set convenzionale più grande
 	\end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
