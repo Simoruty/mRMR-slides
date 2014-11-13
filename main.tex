@@ -74,7 +74,8 @@ Date due variabili casuali \emph{X} e \emph{Y} con distribuzione di probabilità
 informazione è definita come \\~$$I(X; Y ) = H(X) − H(X|Y ) = H(Y ) − H(Y |X)$$\\~\\
 La mutua informazione rappresenta i bit di informazione che una delle variabili fornisce circa l'altra
 \begin{figure}[htb]
-	\includegraphics[width=0.50\textwidth]{figure/mutual.png}
+	\vspace{-0.2cm}
+	\includegraphics[width=0.48\textwidth]{figure/mutual.png}
 \end{figure}
 \end{frame}
 \begin{frame}
@@ -388,7 +389,21 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 
 \section{Algorithm}
 \begin{frame}
-	contenuto...
+	\frametitle{Selezione del Candidate Feature Set}
+	\begin{enumerate}
+		\item Vengono creati $n$ subset sequenziali di feature tramite la selezione incrementale mRMR nella forma
+		$$S_1 \subset S_2 \subset \dots \subset S_{n-1} \subset S_n $$
+		\item Per ogni subset $S_k$ con $1 \leq k \leq n$, verrà calcolato l'errore di cross-validation $e_k$ ed inserito in un insieme $\Omega$.
+		\item Viene selezionato il subset $S_{n^*}$ dove $n^*$ è il subset avente come errore $e^*$ il più piccolo errore di cross validation $\in \Omega$.
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{}
+	fatta la feature selection con mrmr poi preso il subset candidate viene messo in un wrapper dove ci saranno altri algoritmi di feature quali naive, svm, logistic regression (vedi l'altro stupido paper) e mi fai la two stage con il wrapper nella seconda fase e il mrmr nella prima
+\begin{figure}[htb]
+	\includegraphics[width=1\textwidth]{figure/schema.jpg}
+\end{figure}
 \end{frame}
 
 \begin{frame}{Bibliography}
