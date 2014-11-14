@@ -8,7 +8,7 @@
 \usepackage[utf8x]{inputenc}
 \usepackage{listings}
 \usepackage{tikz}
-\usetikzlibrary{arrows}
+\usetikzlibrary{fit, shapes, arrows}
 \usepackage{amsmath,amsfonts,amssymb}
 \usepackage{pgfplots}
 \usepackage{scalefnt}
@@ -46,6 +46,12 @@ Corso di Laurea in Informatica Magistrale
 \pgfdeclareimage[height=1cm]{logo}{figure/theme/logo}
 \logo{\pgfuseimage{logo}}
 
+%New color
+\definecolor{color1}{RGB}{184,184,228}
+\definecolor{color2}{RGB}{214,214,240}
+\definecolor{glicine}{RGB}{201, 160, 220}
+\definecolor{darkorange}{RGB}{226,098,000}
+\definecolor{emerald}{RGB}{000,128,000}
 \begin{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -401,9 +407,43 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 \begin{frame}
 	\frametitle{}
 	fatta la feature selection con mrmr poi preso il subset candidate viene messo in un wrapper dove ci saranno altri algoritmi di feature quali naive, svm, logistic regression (vedi l'altro stupido paper) e mi fai la two stage con il wrapper nella seconda fase e il mrmr nella prima
-\begin{figure}[htb]
-	\includegraphics[width=1\textwidth]{figure/schema.jpg}
-\end{figure}
+
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{mRMR in azione}
+	\begin{tikzpicture}[scale=.8]
+	\tikzstyle{every node} = [rectangle, fill=color1!40!color2, align=center, font=\scriptsize, draw=black, ultra thin]
+	\node (input_data) at (0,0) {Input\\Data};
+	\node (train_data) at (1,1.5) {Training\\Data};
+	\node (test_data) at (1,-1.5) {Test\\Data};
+	\node[fill=emerald, text=white] (feat_sel) at (3.5,1.5) {Feature\\Selection};
+	\node[fill=darkorange, text=white] (mRMR) at (3.5,3) {mRMR};
+	\node (red_data) at (6,1.5) {Reduced\\Data};
+	\node (red_test_data) at (6,-1.5) {Reduced\\Test Data};
+	\node (class) at (8.5,1.5) {Classifier};
+	\node (rule) at (11,1.5) {Rule};
+	\node (pred) at (11,-1.5) {Prediction};
+	\node (class_label) at (11,-3) {Class Label};
+	
+	%Overlapping node to enhance the mRMR node
+	\node[fill=none, draw=red, very thick, solid, fit=(mRMR), inner sep=0.2ex, ellipse] (over) {};
+	\draw
+		(input_data.5) -- ++(0.43,0) edge[->] (train_data)
+		(input_data.0.5) -- ++(0.43,0) edge[->] (test_data)
+		(train_data) edge[->] (feat_sel)
+		(mRMR) edge[->] (feat_sel)
+		(4.75,1.5) edge[->] (4.75,-1.5)
+		(feat_sel) edge[->] (red_data)
+		(test_data) edge[->] (red_test_data)
+		(red_data) edge[->] (class)
+		(class) edge[->] (rule)
+		(red_test_data) edge[->] (pred)
+		(pred) edge[->] (class_label)
+		(rule) edge[->] (pred)
+	;
+	\end{tikzpicture}
 \end{frame}
 
 \begin{frame}{Bibliography}
