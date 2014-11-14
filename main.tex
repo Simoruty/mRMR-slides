@@ -52,6 +52,8 @@ Corso di Laurea in Informatica Magistrale
 \definecolor{glicine}{RGB}{201, 160, 220}
 \definecolor{darkorange}{RGB}{226,098,000}
 \definecolor{emerald}{RGB}{000,128,000}
+\definecolor{stroll}{RGB}{255,255,194}
+\definecolor{newred}{RGB}{225,000,000}
 \begin{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -414,12 +416,12 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 \begin{frame}
 	\frametitle{mRMR in azione}
 	\begin{tikzpicture}[scale=.8]
-	\tikzstyle{every node} = [rectangle, fill=color1!40!color2, align=center, font=\scriptsize, draw=black, ultra thin]
+	\tikzstyle{every node} = [rectangle, fill=stroll, align=center, font=\scriptsize, draw=black, ultra thin]
 	\node (input_data) at (0,0) {Input\\Data};
 	\node (train_data) at (1,1.5) {Training\\Data};
 	\node (test_data) at (1,-1.5) {Test\\Data};
-	\node[fill=emerald, text=white] (feat_sel) at (3.5,1.5) {Feature\\Selection};
-	\node[fill=darkorange, text=white] (mRMR) at (3.5,3) {mRMR};
+	\node[fill=yellow] (feat_sel) at (3.5,1.5) {Feature\\Selection};
+	\node[fill=newred, text=white] (mRMR) at (3.5,3) {mRMR};
 	\node (red_data) at (6,1.5) {Reduced\\Data};
 	\node (red_test_data) at (6,-1.5) {Reduced\\Test Data};
 	\node (class) at (8.5,1.5) {Classifier};
