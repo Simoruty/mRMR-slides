@@ -72,10 +72,46 @@ Corso di Laurea in Informatica Magistrale
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+	\frametitle{mRMR in azione}
+	\begin{tikzpicture}[scale=.8]
+	\tikzstyle{every node} = [rectangle, fill=stroll, align=center, font=\scriptsize, draw=black, ultra thin]
+	\node (input_data) at (0,0) {Input\\Data};
+	\node (train_data) at (1,1.5) {Training\\Data};
+	\node (test_data) at (1,-1.5) {Test\\Data};
+	\node[fill=yellow] (feat_sel) at (3.5,1.5) {Feature\\Selection};
+	\node[fill=newred, text=white] (mRMR) at (3.5,3) {mRMR};
+	\node (red_data) at (6,1.5) {Reduced\\Data};
+	\node (red_test_data) at (6,-1.5) {Reduced\\Test Data};
+	\node (class) at (8.5,1.5) {Classifier};
+	\node (rule) at (11,1.5) {Rule};
+	\node (pred) at (11,-1.5) {Prediction};
+	\node (class_label) at (11,-2.8) {Class Label};
+	
+	%Overlapping node to enhance the mRMR node
+	\node[fill=none, draw=red, very thick, solid, fit=(mRMR), inner sep=0.2ex, ellipse] (over) {};
+	\draw
+	(input_data.5) -- ++(0.43,0) edge[->] (train_data)
+	(input_data.0.5) -- ++(0.43,0) edge[->] (test_data)
+	(train_data) edge[->] (feat_sel)
+	(mRMR) edge[->] (feat_sel)
+	(4.75,1.5) edge[->] (4.75,-1.5)
+	(feat_sel) edge[->] (red_data)
+	(test_data) edge[->] (red_test_data)
+	(red_data) edge[->] (class)
+	(class) edge[->] (rule)
+	(red_test_data) edge[->] (pred)
+	(pred) edge[->] (class_label)
+	(rule) edge[->] (pred)
+	;
+	\end{tikzpicture}
+\end{frame}
+
 \section{Mutual Information}
 \subsection{Definizione}
 \begin{frame}
-	\frametitle{Definizione}
+	\frametitle{Mutual Information - Definizione}
 		\nocite{Ding:2003:MRF:937976.938050}
 		\nocite{Peng05featureselection}
 Date due variabili casuali \emph{X} e \emph{Y} con distribuzione di probabilità congiunta $p(x, y)$, la mutua
@@ -397,6 +433,17 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 
 \section{Algorithm}
 \begin{frame}
+	\frametitle{Feature Selection}
+	La fase di Feature Selection avverrà in modalità \textbf{two stage}:
+	\begin{enumerate}
+		\item Selezione del candidate feature set tramite l'utilizzo della tecnica mRMR
+		\item Utilizzo del wrapper model per una ulteriore selezione di feature partendo dal candidate feature set
+	\end{enumerate}
+	\begin{figure}[htb]
+		\includegraphics[width=.9\textwidth]{figure/twostage.png}
+	\end{figure}
+\end{frame}
+\begin{frame}
 	\frametitle{Selezione del Candidate Feature Set}
 	\begin{enumerate}
 		\item Vengono creati $n$ subset sequenziali di feature tramite la selezione incrementale mRMR nella forma
@@ -407,45 +454,18 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 \end{frame}
 
 \begin{frame}
+	\frametitle{Wrapper Model}
+	
+\begin{figure}[htb]
+	\vspace{-0.2cm}
+	\includegraphics[width=.70\textwidth]{figure/wrapper.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}
 	\frametitle{}
 	fatta la feature selection con mrmr poi preso il subset candidate viene messo in un wrapper dove ci saranno altri algoritmi di feature quali naive, svm, logistic regression (vedi l'altro stupido paper) e mi fai la two stage con il wrapper nella seconda fase e il mrmr nella prima
 
-\end{frame}
-
-
-\begin{frame}
-	\frametitle{mRMR in azione}
-	\begin{tikzpicture}[scale=.8]
-	\tikzstyle{every node} = [rectangle, fill=stroll, align=center, font=\scriptsize, draw=black, ultra thin]
-	\node (input_data) at (0,0) {Input\\Data};
-	\node (train_data) at (1,1.5) {Training\\Data};
-	\node (test_data) at (1,-1.5) {Test\\Data};
-	\node[fill=yellow] (feat_sel) at (3.5,1.5) {Feature\\Selection};
-	\node[fill=newred, text=white] (mRMR) at (3.5,3) {mRMR};
-	\node (red_data) at (6,1.5) {Reduced\\Data};
-	\node (red_test_data) at (6,-1.5) {Reduced\\Test Data};
-	\node (class) at (8.5,1.5) {Classifier};
-	\node (rule) at (11,1.5) {Rule};
-	\node (pred) at (11,-1.5) {Prediction};
-	\node (class_label) at (11,-3) {Class Label};
-	
-	%Overlapping node to enhance the mRMR node
-	\node[fill=none, draw=red, very thick, solid, fit=(mRMR), inner sep=0.2ex, ellipse] (over) {};
-	\draw
-		(input_data.5) -- ++(0.43,0) edge[->] (train_data)
-		(input_data.0.5) -- ++(0.43,0) edge[->] (test_data)
-		(train_data) edge[->] (feat_sel)
-		(mRMR) edge[->] (feat_sel)
-		(4.75,1.5) edge[->] (4.75,-1.5)
-		(feat_sel) edge[->] (red_data)
-		(test_data) edge[->] (red_test_data)
-		(red_data) edge[->] (class)
-		(class) edge[->] (rule)
-		(red_test_data) edge[->] (pred)
-		(pred) edge[->] (class_label)
-		(rule) edge[->] (pred)
-	;
-	\end{tikzpicture}
 \end{frame}
 
 \begin{frame}{Bibliography}
