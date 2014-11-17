@@ -8,7 +8,7 @@
 \usepackage[utf8x]{inputenc}
 \usepackage{listings}
 \usepackage{tikz}
-\usetikzlibrary{fit, shapes, arrows}
+\usetikzlibrary{fit, shapes, arrows, patterns, matrix}
 \usepackage{amsmath,amsfonts,amssymb}
 \usepackage{pgfplots}
 \usepackage{scalefnt}
@@ -455,7 +455,7 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 
 \begin{frame}
 	\frametitle{Wrapper Model}
-	
+	Il 
 \begin{figure}[htb]
 	\vspace{-0.2cm}
 	\includegraphics[width=.70\textwidth]{figure/wrapper.png}
@@ -463,8 +463,45 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 \end{frame}
 
 \begin{frame}
+	\frametitle{Na$\ddot{i}$ve Bayes (NB) classifier}
+	\begin{itemize}
+		\item Si basa sul \textbf{Teorema di Bayes}
+		\item Tutte le feature sono indipendenti tra loro (\textbf{indipendence assumption})
+	\end{itemize}
+	$$p(h_k|s) \propto \prod_{i \in S}{p(g_i|h_k)}$$ dove 
+	\begin{itemize}
+		\item $s$ = Set di $m$ feature cosi composto $s= \{ g_1,g_2,\dots,g_m \}$
+		\item $p(h_k|s)$ = probabilità a posteriori che un set $s$ appartenga alla classe $h_k$
+		\item $ p(g_i|h_k)$ = probabilità a posteriori che la feature $g_i$ sia di classe $h_k$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Support Vector Machine (SVM)}
+	\begin{itemize}
+		\item SVM massimizza il \emph{margine} di separazione tra gli iperpiani
+		\item La funzione di decisione viene creata sulla base del subset di esempi (\emph{support vectors})
+	\end{itemize}
+	\begin{figure}[htb]
+		\vspace{-0.2cm}
+		\includegraphics[width=.80\textwidth]{figure/svm.png}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Linear Discriminant Analysis (LDA)}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Logistic Regression (LR)}
+\end{frame}
+
+\begin{frame}
 	\frametitle{}
 	fatta la feature selection con mrmr poi preso il subset candidate viene messo in un wrapper dove ci saranno altri algoritmi di feature quali naive, svm, logistic regression (vedi l'altro stupido paper) e mi fai la two stage con il wrapper nella seconda fase e il mrmr nella prima
+
+\end{frame}
+\begin{frame}
 
 \end{frame}
 
