@@ -444,7 +444,7 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 	\end{figure}
 \end{frame}
 \begin{frame}
-	\frametitle{Selezione del Candidate Feature Set}
+	\frametitle{Fase 1 - Selezione del Candidate Feature Set}
 	\begin{enumerate}
 		\item Vengono creati $n$ subset sequenziali di feature tramite la selezione incrementale mRMR nella forma
 		$$S_1 \subset S_2 \subset \dots \subset S_{n-1} \subset S_n $$
@@ -454,16 +454,24 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 \end{frame}
 
 \begin{frame}
-	\frametitle{Wrapper Model}
-	Il 
+	\frametitle{Fase 2 - Wrapper Model}
+	\begin{itemize}
+		\item Il subset candidato sarà il subset dato in input al wrapper
+		\item Utilizzo di 4 tecniche di feature selection
+			\begin{itemize}
+				\item Na\"ive Bayes (NB) classifier
+				\item Support Vector Machine (SVM)
+				\item Linear Discriminant Analysis (LDA)
+				\item Logistic Regression (LR)
+			\end{itemize}
+		\end{itemize}
 \begin{figure}[htb]
-	\vspace{-0.2cm}
 	\includegraphics[width=.70\textwidth]{figure/wrapper.png}
 \end{figure}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Na$\ddot{i}$ve Bayes (NB) classifier}
+	\frametitle{Na\"ive Bayes (NB) classifier}
 	\begin{itemize}
 		\item Si basa sul \textbf{Teorema di Bayes}
 		\item Tutte le feature sono indipendenti tra loro (\textbf{indipendence assumption})
@@ -490,19 +498,33 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 
 \begin{frame}
 	\frametitle{Linear Discriminant Analysis (LDA)}
+	Metodo di classificazione che sfrutta la combinazione lineare tra feature sotto determinate assunzioni:
+	\begin{columns}[c]
+		\begin{column}{.5\textwidth}
+			\begin{figure}[htb]
+				\vspace{-0.2cm}
+				\includegraphics[width=1\textwidth]{figure/LDA.png}
+			\end{figure}
+		\end{column}
+		\begin{column}{.5\textwidth}
+			\begin{itemize}
+				\item Ogni campione segue una distribuzione Gaussiana
+				\item Nessuna correlazione tra feature
+			\end{itemize}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Logistic Regression (LR)}
-\end{frame}
-
-\begin{frame}
-	\frametitle{}
-	fatta la feature selection con mrmr poi preso il subset candidate viene messo in un wrapper dove ci saranno altri algoritmi di feature quali naive, svm, logistic regression (vedi l'altro stupido paper) e mi fai la two stage con il wrapper nella seconda fase e il mrmr nella prima
-
-\end{frame}
-\begin{frame}
-
+	\begin{itemize}
+		\item Caso particolare di modello lineare generalizzato
+		\item Applicazione di una funzione logistica alla combinazione lineare delle feature in modo da limitarla in un intervallo $[0;1]$ 
+%		$$F(x)=\frac{1}{1+e^{-(\beta_0+\beta_1x)}}$$
+	\end{itemize}
+	\begin{figure}[htb]
+		\includegraphics[width=.9\textwidth]{figure/LogReg.png}
+	\end{figure}
 \end{frame}
 
 \begin{frame}{Bibliography}
