@@ -16,6 +16,7 @@
 \usepackage{xcolor}
 \usepackage{multicol}
 \usepackage{bm}
+\usepackage{changepage}
 
 \title[mRMR]{mRMR - features selection method}
 \institute{
@@ -46,7 +47,7 @@ Corso di Laurea in Informatica Magistrale
 \pgfdeclareimage[height=1cm]{logo}{figure/theme/logo}
 \logo{\pgfuseimage{logo}}
 
-%New color
+%New colors
 \definecolor{color1}{RGB}{184,184,228}
 \definecolor{color2}{RGB}{214,214,240}
 \definecolor{glicine}{RGB}{201, 160, 220}
@@ -114,22 +115,32 @@ Corso di Laurea in Informatica Magistrale
 	\frametitle{Mutual Information - Definizione}
 		\nocite{Ding:2003:MRF:937976.938050}
 		\nocite{Peng05featureselection}
-Date due variabili casuali \emph{X} e \emph{Y} con distribuzione di probabilità congiunta $p(x, y)$, la mutua
-informazione è definita come \\~$$I(X; Y ) = H(X) − H(X|Y ) = H(Y ) − H(Y |X)$$\\~\\
-La mutua informazione rappresenta i bit di informazione che una delle variabili fornisce circa l'altra
-\begin{figure}[htb]
-	\vspace{-0.2cm}
-	\includegraphics[width=0.48\textwidth]{figure/mutual.png}
-\end{figure}
+	\begin{itemize}
+		\item La mutua informazione rappresenta i bit di informazione che una delle variabili fornisce riguardo l'altra.
+		\item Date due variabili casuali \emph{X} e \emph{Y}, la mutua informazione è definita come $$I(X; Y ) = H(X) − H(X|Y ) = H(Y ) − H(Y |X)$$
+	\end{itemize}
+	dove le entropie sono calcolate \newline
+	\begin{align*}
+		H(X)&= - \sum_{i \in X}{P(x_i)*log(P(x_i))} \\
+		H(X,Y)&= - \sum_{i \in X}\sum_{j \in Y}{P(x_i,y_j)*log(P(x_i,y_j))}
+	\end{align*}
 \end{frame}
 \begin{frame}
 	\frametitle{Considerazioni}
+	\begin{adjustwidth}{-2.1em}{-2.1em}
 	\begin{itemize}
-		\item $I(X;Y)=0 \Rightarrow$ \emph{X} e \emph{Y} sono variabili indipendenti
-		\item $\pmb{I(X;Y)} = H(X)-H(X|Y)=H(Y)-H(Y|X)= \pmb{I(Y;X)}$
-		\item $I(X;X)=H(X)$
+		\item \textsc{Indipendenza:} $I(X;Y)=0$ \newline
+		\item \textsc{Simmetria:} $I(X;Y) = H(X)-H(X|Y)=H(Y)-H(Y|X)= I(Y;X)$ \newline
+		\item \textsc{Riflessività:} $I(X;X)=H(X)$ \newline
 	\end{itemize}
+	\begin{figure}[htb]
+		\vspace{-0.2cm}
+		\includegraphics[width=.48\textwidth]{figure/mutual.png}
+	\end{figure}
+
+	\end{adjustwidth}
 \end{frame}
+
 \begin{frame}
 	\frametitle{Esempio}
 	Lanciamo 10 monete:
@@ -139,13 +150,13 @@ La mutua informazione rappresenta i bit di informazione che una delle variabili 
 	\end{itemize}
 	Avremo che:
 	\begin{columns}
-		\begin{column}{0.5\textwidth}
+		\begin{column}{0.455\textwidth}
 			\begin{itemize}
 				\item $H(X) = 7$
 				\item $H(Y) = 5$\newline
 			\end{itemize}
 		\end{column}
-		\begin{column}{0.5\textwidth}
+		\begin{column}{0.455\textwidth}
 			\begin{itemize}
 				\item $H(X|Y) = 5$
 				\item $H(Y|X) = 3$\newline
@@ -183,7 +194,7 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 	\end{itemize}
 	\textbf{Soluzione}
 	\begin{itemize}
-		\item Incorporare la discretizzazione dei dati nella fase di preprocessing
+		\item Discretizzazione dei dati nella fase di preprocessing
 	\end{itemize}
 \end{frame}
 
