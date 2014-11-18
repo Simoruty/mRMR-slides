@@ -431,7 +431,7 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Algorithm}
+\section{Algoritmo}
 \begin{frame}
 	\frametitle{Feature Selection}
 	La fase di Feature Selection avverrà in modalità \textbf{two stage}:
@@ -525,6 +525,33 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 	\begin{figure}[htb]
 		\includegraphics[width=.9\textwidth]{figure/LogReg.png}
 	\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Sperimentazione}
+\begin{frame}
+	\frametitle{Sperimentazione \dots}
+	La sperimentazione eseguita aveva i seguenti parametri:
+	\begin{itemize}
+		\item Esecuzione su 6 dataset di geni contenenti sia attributi discreti che continui
+		\item Goal: Verificare se l'approccio mRMR potesse migliorare le performance di classificazione
+		\item Configurazioni
+		\begin{itemize}
+			\item Baseline + wrapper (NB, SVM, LDA, LR)
+			\item mRMR approach + wrapper (NB, SVM, LDA, LR)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{\dots Sperimentazione}
+	I risultati mostrano che mRMR performa meglio della baseline su tutte le configurazioni, in particolare
+	\begin{itemize}
+		\item Su variabili discrete la scelta migliore ricade su MIQ
+		\item Su variabili continue la scelta migliore ricade su FCQ
+		\item Framework mRMR indipendente dal metodo predittivo utilizzato
+		\item mRMR riesce con meno feature della baseline ad eguagliare e migliorare le performance
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Bibliography}
