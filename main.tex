@@ -204,7 +204,7 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 \subsection{Definizione}
 \begin{frame}
 	\frametitle{Max Dependency \dots}
-	In termini di mutua informazione, l'obiettivo è trovare il set di feature \emph{S} con \emph{m} features che hanno la più alta dipendenza con la classe target \emph{c}
+	In termini di mutua informazione, l'obiettivo è trovare il set di feature \emph{S} con \emph{m} features che abbia la più alta dipendenza con la classe target \emph{c}
 	$$ \max Dep(S,c)~~~~~ Dep = I(\{x_1,\dots,x_m \};c )$$
 	Dove 
 	\begin{itemize}
@@ -232,7 +232,7 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 \subsection{Problemi}
 \begin{frame}
 	\frametitle{Problemi nel continuo}
-	Difficoltà nella stima accurata delle funzioni di densità multivariate $p(x_1,\dots,x_m)$ e $p(x_1,\dots,x_m,c)$
+	Difficoltà nella stima accurata delle funzioni di densità multivariate $p(x_1,\dots,x_m)$ e $p(x_1,\dots,x_m,c)$ a causa:
 	\begin{itemize}
 		\item Numero di campioni insufficienti
 		\item Comporta il calcolo delle inverse delle matrice di covarianza multidimensionali
@@ -242,7 +242,7 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 
 \begin{frame}
 	\frametitle{Problemi nel discreto}
-	Difficoltà nel calcolo delle funzioni di distribuzione di probabilità congiunta $p(x_1,\dots,x_m)$ e $p(x_1,\dots,x_m,c)$
+	Difficoltà nel calcolo delle funzioni di distribuzione di probabilità congiunta $p(x_1,\dots,x_m)$ e $p(x_1,\dots,x_m,c)$ a causa:
 	\begin{itemize}
 		\item Numero di campioni insufficienti
 		\item Computazione molto lenta in caso di un valore \emph{m} molto alto
@@ -451,6 +451,7 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 		\item Utilizzo del wrapper model per una ulteriore selezione di feature partendo dal candidate feature set
 	\end{enumerate}
 	\begin{figure}[htb]
+		\vspace*{-0.2cm}
 		\includegraphics[width=.9\textwidth]{figure/twostage.png}
 	\end{figure}
 \end{frame}
@@ -487,11 +488,11 @@ $$I(X; Y ) = I(Y ; X) = 2 $$
 		\item Si basa sul \textbf{Teorema di Bayes}
 		\item Tutte le feature sono indipendenti tra loro (\textbf{indipendence assumption})
 	\end{itemize}
-	$$p(h_k|s) \propto \prod_{i \in S}{p(g_i|h_k)}$$ dove 
+	$$p(c_k|S) \propto \prod_{g \in S}{p(g|c_k)}$$ dove 
 	\begin{itemize}
-		\item $s$ = Set di $m$ feature cosi composto $s= \{ g_1,g_2,\dots,g_m \}$
-		\item $p(h_k|s)$ = probabilità a posteriori che un set $s$ appartenga alla classe $h_k$
-		\item $ p(g_i|h_k)$ = probabilità a posteriori che la feature $g_i$ sia di classe $h_k$
+		\item $S$ = Set di $m$ feature cosi composto $s= \{ g_1,g_2,\dots,g_m \}$
+		\item $p(c_k|S)$ = probabilità a posteriori che il set $S$ determini la classe $c_k$
+		\item $ p(g|c_k)$ = probabilità a posteriori che il valore $g$ occorra\\ nelle istanze di classe $c_k$
 	\end{itemize}
 \end{frame}
 
